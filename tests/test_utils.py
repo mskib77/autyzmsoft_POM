@@ -1,10 +1,10 @@
 import os
 from datetime import datetime
 from selenium.webdriver.common.by import By
+from urllib.request import urlopen
 
 
 class TestUtils:
-
     WAIT_TIME = 5  # system-wide implicit wait
     # Pages' titles (same location on each page):
     PAGE_TITLE = (By.XPATH, '//*[@id = "content"]/div[1]/h1')
@@ -32,3 +32,12 @@ class TestUtils:
         # print(f"Sciezka: {store_file}")
         driver.get_screenshot_as_file(store_file)
 
+    @classmethod
+    def get_link_status(cls, url_param):
+        try:
+            urlopen(url_param)
+            print(f"{url_param} - ok")
+            return True
+        except:
+            print(f"{url_param} - problem....")
+            return False

@@ -6,11 +6,13 @@ from pages.full_versions_page import FullVersionsPage
 from tests.base_test import BaseTest
 from time import sleep
 
+from tests.test_utils import TestUtils
+
 
 class HomePageTest(BaseTest):
 
     def setUp(self):
-        """Creating HomePage object begore each test"""
+        """Creating HomePage object before each test"""
         super().setUp()
         self.hp = HomePage(self.driver)
 
@@ -33,8 +35,21 @@ class HomePageTest(BaseTest):
         FullVersionsPage(self.driver)
 
     # @unittest.skip
-    def test_all_links_active(self):
+    def test_all_links_are_active(self):
         """Checking whether all links on the Home Page are active."""
         hp = self.hp
-        hp.get_clickable_links()
+        clickable_links = hp.get_clickable_links()
+        test_ok = True
+        inactive_links = []
+        for url_str in clickable_links:
+            status_ok = TestUtils.get_link_status(url_str)
+            if not status_ok:
+                test_ok = False
+                inactive_links.append(url_str)
+        self.assertTrue(test_ok, f"Inactive links on Home Page detected: {inactive_links}")
+
+
+
+
+
 

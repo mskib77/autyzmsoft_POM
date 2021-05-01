@@ -1,6 +1,7 @@
 from locators import HomePageLocators
 from pages.base_page import BasePage
 from tests.test_utils import TestUtils
+import validators
 
 
 class HomePage(BasePage):
@@ -28,24 +29,20 @@ class HomePage(BasePage):
         link.click()
 
     def get_clickable_links(self):
-        links_to_click = []
-        elements = self.driver.find_elements(*HomePageLocators.VISIBLE_LINKS)
+        """Returns string list of urls found on Home Page"""
+        links_to_click = []  # urls as string to be returned
+        elements = self.driver.find_elements(*HomePageLocators.LINKS)
         images = self.driver.find_elements(*HomePageLocators.IMAGES)
-        # images can also be links:
+        # images can also be links, so we add them:
         elements = [*elements, *images]
-        # only 'real' links:
+        # getting 'real' links only:
         for e in elements:
             if e.get_attribute('href') is not None:
-                links_to_click.append(e)
-
-        # for i in range(0, len(links_to_click)):
-        #     print(i, links_to_click[i].get_attribute('href'))
-
-        # try:
-        #     if elements[i].get_attribute('href') is not None:
-        #         links_to_click.append(elements[i])
-        #         print(i, " ", elements[i].text, " | ", elements[i].get_attribute('href'), " Licznosc listy links_to_click = ", len(links_to_click))
-        # except Exception as e:
-        #     print(f"wyjatek przy {i} , {e.__class__}")
-
+                link_str = e.get_attribute('href')
+                if validators.url(link_str):  # filtering out a few 'strange' urls + javascripts etc. ;)
+                    links_to_click.append(link_str)
+        # Duplicate removal:
+        links_to_click = list(dict.fromkeys(links_to_click))
+        #
         return links_to_click
+
