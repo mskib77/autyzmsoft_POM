@@ -6,6 +6,11 @@ class HomePageLocators:
     PELNE_WERSJE_LINK = (By.PARTIAL_LINK_TEXT, "PEŁNE WERSJE")
     COOKIE_BTN = (By.ID, "catapultCookie")
 
+    VISIBLE_LINKS = (By.TAG_NAME, "a")
+    IMAGES = (By.TAG_NAME, "img")
+
+
+
 
 class DownloadPageLocators:
     EMAIL_FIELD = (By.ID, "id_Email")
