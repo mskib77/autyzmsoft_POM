@@ -1,4 +1,5 @@
 from pages.download_page import DownloadPage
+from pages.home_page import HomePage
 from tests.base_test import BaseTest
 from tests.test_utils import TestUtils
 from time import sleep
@@ -9,10 +10,14 @@ class DownloadPageTest(BaseTest):
     def setUp(self):
         """Going to Download Page before each test"""
         super().setUp()
-        TestUtils.go_to_download_page(self.driver)
+        # Bringing up download page:
+        hp = HomePage(self.driver)
+        hp.click_download_link()
+        # Creating DownloadPage object for each test:
+        self.dp = DownloadPage(self.driver)
 
     def test_getting_download_links_with_correct_email(self):
-        dp = DownloadPage(self.driver)
+        dp = self.dp
         dp.fill_email(TestUtils.good_email)
         sleep(1)
         dp.click_send_button()
@@ -29,14 +34,13 @@ class DownloadPageTest(BaseTest):
         self.assertTrue(test_ok, reason)
 
     def test_getting_download_links_with_incorrect_email(self):
-        dp = DownloadPage(self.driver)
+        dp = self.dp
         dp.fill_email(TestUtils.bad_email)
         sleep(1)
         dp.click_send_button()
         sleep(1)
         info = dp.get_error_info_text()
         test_ok = TestUtils.dp_error_info.upper() in info.upper()
-        self.assertTrue(test_ok, "Improper reaction to erroneous email address.")
-
-
-
+        if test_ok:
+            TestUtils.screen_shot(self.driver, "Improper reaction to erroneous email")
+        self.assertTrue(test_ok, "Improper reaction to erroneous email address.See picture.")
