@@ -1,0 +1,23 @@
+from pages.download_page import DownloadPage
+from pages.home_page import HomePage
+from pages.full_versions_page import FullVersionsPage
+from tests.base_test import BaseTest
+from time import sleep
+
+
+class HomePageTest(BaseTest):
+
+    def test_download_page_appears(self):
+        """ Fails if _verify_page() in DownloadPage class reports an error in its assert"""
+        hp = HomePage(self.driver)
+        hp.click_download_link()
+        sleep(1)
+        # this will instantiate DownloadPage object and will call its _verify_page() method:
+        DownloadPage(self.driver)
+
+    def test_full_versions_page_appears(self):
+        hp = HomePage(self.driver)
+        hp.click_full_versions_link()
+        sleep(1)
+        # this will instantiate FullVersionPage object and will call its _verify_page() method:
+        FullVersionsPage(self.driver)
