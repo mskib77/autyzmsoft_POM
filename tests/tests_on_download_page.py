@@ -41,6 +41,6 @@ class DownloadPageTest(BaseTest):
         sleep(1)
         info = dp.get_error_info_text()
         test_ok = TestUtils.dp_error_info.upper() in info.upper()
-        if test_ok:
+        if not test_ok:
             TestUtils.screen_shot(self.driver, "Improper reaction to erroneous email")
         self.assertTrue(test_ok, "Improper reaction to erroneous email address.See picture.")

@@ -9,7 +9,7 @@ class HomePage(BasePage):
         super()._verify_page()
         print("Weryfikacja z HomePage - nadpisująca _verify_page() z BasePage")
         title_txt = TestUtils.get_page_title_txt(self.driver)
-        assert (title_txt.upper() == "STRONA GŁÓWNA")
+        assert (title_txt.upper() == TestUtils.hp_title.upper())
 
     def _get_download_link(self):
         link = self.driver.find_element(*HomePageLocators.DOWNLOAD_LINK)
