@@ -34,7 +34,7 @@ class HomePageTest(BaseTest):
         # this will instantiate FullVersionPage object and will call its _verify_page() method:
         FullVersionsPage(self.driver)
 
-    # @unittest.skip
+    @unittest.skip
     def test_all_links_are_active(self):
         """Checking whether all links on the Home Page are active."""
         hp = self.hp
@@ -47,6 +47,15 @@ class HomePageTest(BaseTest):
                 test_ok = False
                 inactive_links.append(url_str)
         self.assertTrue(test_ok, f"Inactive links on Home Page detected: {inactive_links}")
+
+    def test_prof_marcin_js_opens(self):
+        """Test whether javascript application profMarcin opens"""
+        hp = self.hp
+        hp.go_to_prof_marcin_js()
+        sleep(5)
+
+
+
 
 
 

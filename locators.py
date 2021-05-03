@@ -9,7 +9,13 @@ class HomePageLocators:
     LINKS = (By.TAG_NAME, "a")
     IMAGES = (By.TAG_NAME, "img")
 
-
+    # Elements to start and navigate in prof.Marcin Java Script application:
+    WERSJE_ONLINE = (By.LINK_TEXT, "wersje online")
+    PROF_MARCIN_JS = (By.PARTIAL_LINK_TEXT, "prof.Marcin")
+    # STARTUJ = (By.XPATH, '//a[@href="plansza.html"]')
+    # STARTUJ = (By.XPATH, '//section[@class="start"]')
+    # STARTUJ = (By.XPATH, '//*[@id="container"]/section[2]/a')
+    STARTUJ = (By.LINK_TEXT, "Startuj")
 
 
 class DownloadPageLocators:

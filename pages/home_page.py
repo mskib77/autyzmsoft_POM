@@ -1,3 +1,7 @@
+from time import sleep
+
+from selenium.webdriver import ActionChains
+
 from locators import HomePageLocators
 from pages.base_page import BasePage
 from tests.test_utils import TestUtils
@@ -45,4 +49,28 @@ class HomePage(BasePage):
         links_to_click = list(dict.fromkeys(links_to_click))
         #
         return links_to_click
+
+    def _hover_over_online_versions(self):
+        el_to_hover = self.driver.find_element(*HomePageLocators.WERSJE_ONLINE)
+        action = ActionChains(self.driver)
+        action.move_to_element(el_to_hover).perform()
+
+    def _get_prof_marcin_js_link(self):
+        link = self.driver.find_element(*HomePageLocators.PROF_MARCIN_JS)
+        return link
+
+    def go_to_prof_marcin_js(self):
+        self._hover_over_online_versions()
+        sleep(2)
+        link = self._get_prof_marcin_js_link()
+        link.click()
+        sleep(5)
+        print("szukam bstartuj....")
+        b_startuj = self.driver.find_element(*HomePageLocators.STARTUJ)
+        print("PO szukam bstartuj....")
+        sleep(5)
+        b_startuj.click()
+        sleep(5)
+
+
 
