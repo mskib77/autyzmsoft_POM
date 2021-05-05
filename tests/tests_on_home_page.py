@@ -5,7 +5,7 @@ from pages.home_page import HomePage
 from pages.full_versions_page import FullVersionsPage
 from tests.base_test import BaseTest
 from time import sleep
-
+from selenium.common.exceptions import NoSuchElementException
 from tests.test_utils import TestUtils
 
 
@@ -57,14 +57,39 @@ class HomePageTest(BaseTest):
 
     def test_liczykropka_js_opens(self):
         """Test whether javascript application LiczyKropka opens"""
+        """Passed if a big number and 5 buttons appear"""
+        NUM_BUTTONS = 5  # how many buttons should appear
         hp = self.hp
         hp.go_to_liczykropka_js()
-        sleep(2)
+        sleep(3)
 
+        test_1_ok = False
+        try:
+            buttons_list = hp.get_buttons_list_from_liczykropka()
+            if len(buttons_list) == NUM_BUTTONS:
+                test_1_ok = True
+        except NoSuchElementException:
+            test_1_ok = False
 
+        test_2_ok = False
+        try:
+            number = hp.get_number_from_liczykropka()
+            if number.text.isnumeric():
+                test_2_ok = True
+            # print(f"Liczba: {number.text}")
+        except NoSuchElementException:
+            test_2_ok = False
 
+        # determining the reason of negative test:
+        reason = []
+        if not test_1_ok:
+            reason.append(f"Number of buttons different than {NUM_BUTTONS} or buttons did not appear.")
+        if not test_2_ok:
+            reason.append(f"Big number did not appear on the screen.")
 
+        test_ok = test_1_ok and test_2_ok
 
+        if not test_ok:
+            TestUtils.screen_shot(self.driver, "Error in liczykropka.js")
 
-
-
+        self.assertTrue(test_ok, f"Error in liczykropka.js {reason} See picture.")

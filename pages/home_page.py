@@ -1,7 +1,7 @@
 from time import sleep
-from selenium import webdriver
 from selenium.webdriver import ActionChains
-
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 from locators import HomePageLocators
 from pages.base_page import BasePage
 from tests.test_utils import TestUtils
@@ -50,10 +50,10 @@ class HomePage(BasePage):
         #
         return links_to_click
 
-    def _hover_over_online_versions(self):
-        el_to_hover = self.driver.find_element(*HomePageLocators.WERSJE_ONLINE)
+    def _hover_over(self, element):
+        el = self.driver.find_element(*element)
         action = ActionChains(self.driver)
-        action.move_to_element(el_to_hover).perform()
+        action.move_to_element(el).perform()
 
     def _get_prof_marcin_js_link(self):
         link = self.driver.find_element(*HomePageLocators.PROF_MARCIN_JS)
@@ -77,37 +77,24 @@ class HomePage(BasePage):
         b_startuj.click()
         sleep(5)
 
-    def go_to_liczykropka_js(self):
-        self._hover_over_online_versions()
-        sleep(2)
-        link = self._get_liczykropka_js_link()
+    def get_buttons_list_from_liczykropka(self):
+        blist = self.driver.find_elements(*HomePageLocators.KLAWISZE)
+        return blist
 
+    def get_number_from_liczykropka(self):
+        number = self.driver.find_element(*HomePageLocators.LICZBA)
+        return number
+
+    def go_to_liczykropka_js(self):
+        self._hover_over(HomePageLocators.WERSJE_ONLINE)   # uncovering menu items
+        self._hover_over(HomePageLocators.LICZYKROPKA_JS)  # unnecessary, but better visual effect :)
+        link = WebDriverWait(self.driver, TestUtils.WAIT_TIME).until(EC.presence_of_element_located(HomePageLocators.LICZYKROPKA_JS))
+        # Page needs to be reloaded, otherwise selenium can't locate elements:
         url_liczykropka = link.get_attribute('href')
-        self.driver.quit()
-        self.driver = webdriver.Chrome()
         self.driver.get(url_liczykropka)
-        self.driver.maximize_window()
-        # sleep(2)
         bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
         bStartuj.click()
-        sleep(5)
 
-        #
-        # link.click()
-        # sleep(5)
-        #
-        # # self.driver.quit()
-        # sleep(2)
-        # # self.driver = webdriver.Chrome()
-        # self.driver.get('https://autyzmsoft.pl/js/liczykropka/liczykropka.html')
-        # self.driver.maximize_window()
-        # sleep(3)
-        #
-        #
-        # bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
-        # bStartuj.click()
-        # sleep(4)
-        #
 
 
 

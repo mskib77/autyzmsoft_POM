@@ -9,18 +9,18 @@ class HomePageLocators:
     LINKS = (By.TAG_NAME, "a")
     IMAGES = (By.TAG_NAME, "img")
 
-    # Elements to start and navigate in prof.Marcin Java Script application:
-    WERSJE_ONLINE = (By.LINK_TEXT, "wersje online")
-    PROF_MARCIN_JS = (By.LINK_TEXT, "prof.Marcin")
-    LICZYKROPKA_JS = (By.LINK_TEXT, "LiczyKropka")
+    # Links to start settings screens of some Java Script application:
+    WERSJE_ONLINE = (By.LINK_TEXT, "wersje online")  # to hover over to uncover ;)
+    PROF_MARCIN_JS = (By.LINK_TEXT, "prof.Marcin")  # to start prof.Marcin settings page
+    LICZYKROPKA_JS = (By.LINK_TEXT, "LiczyKropka")  # to start LiczyKropka settings page
 
-
-    # STARTUJ = (By.XPATH, '//a[@href="plansza.html"]')
-    # STARTUJ = (By.XPATH, '//section[@class="start"]')
-    # STARTUJ = (By.XPATH, '//*[@id="container"]/section[2]/a')
-    # STARTUJ = (By.LINK_TEXT, "Startuj")
+    # Links to start js applications:
     STARTUJ_PROF_MARCIN = (By.ID, "b_start_id")
     STARTUJ_LICZYKROPKA = (By.ID, "bStartuj")
+
+    # elements on Liczykropka js application:
+    LICZBA = (By.XPATH, '//div[@class="div-liczba-klasa div-liczba-klasa-growing"]')
+    KLAWISZE = (By.CLASS_NAME, "klawisz-klasa")
 
 
 class DownloadPageLocators:
