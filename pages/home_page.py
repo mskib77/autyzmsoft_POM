@@ -1,4 +1,3 @@
-from time import sleep
 from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -63,19 +62,20 @@ class HomePage(BasePage):
         link = self.driver.find_element(*HomePageLocators.LICZYKROPKA_JS)
         return link
 
-    def go_to_prof_marcin_js(self):
-        self._hover_over_online_versions()
-        sleep(2)
-        link = self._get_prof_marcin_js_link()
-        link.click()
-        sleep(5)
-        print("szukam bstartuj....")
+    def _start_js_app_settings_screen(self, link_to_app):
+        """Opens the first screen of Java Script app given in the link_to_app parameter"""
+        """Used to start the js applications from there by finding and clicking links"""
+        self._hover_over(HomePageLocators.WERSJE_ONLINE)  # uncovering menu items
+        self._hover_over(link_to_app)  # unnecessary, but better visual effect ;)
+        link = WebDriverWait(self.driver, TestUtils.WAIT_TIME).until(EC.presence_of_element_located(link_to_app))
+        # Page needs to be reloaded, otherwise selenium can't locate elements:
+        url = link.get_attribute('href')
+        self.driver.get(url)
 
-        b_startuj = self.driver.find_element(*HomePageLocators.STARTUJ_PROF_MARCIN)
-        print("PO szukam bstartuj....")
-        sleep(5)
-        b_startuj.click()
-        sleep(5)
+    def go_to_prof_marcin_js(self):
+        self._start_js_app_settings_screen(HomePageLocators.PROF_MARCIN_JS)
+        bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_PROF_MARCIN)
+        bStartuj.click()
 
     def get_buttons_list_from_liczykropka(self):
         blist = self.driver.find_elements(*HomePageLocators.KLAWISZE)
@@ -86,12 +86,7 @@ class HomePage(BasePage):
         return number
 
     def go_to_liczykropka_js(self):
-        self._hover_over(HomePageLocators.WERSJE_ONLINE)   # uncovering menu items
-        self._hover_over(HomePageLocators.LICZYKROPKA_JS)  # unnecessary, but better visual effect :)
-        link = WebDriverWait(self.driver, TestUtils.WAIT_TIME).until(EC.presence_of_element_located(HomePageLocators.LICZYKROPKA_JS))
-        # Page needs to be reloaded, otherwise selenium can't locate elements:
-        url_liczykropka = link.get_attribute('href')
-        self.driver.get(url_liczykropka)
+        self._start_js_app_settings_screen(HomePageLocators.LICZYKROPKA_JS)
         bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
         bStartuj.click()
 
