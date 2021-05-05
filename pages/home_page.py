@@ -71,10 +71,6 @@ class HomePage(BasePage):
         sleep(5)
         print("szukam bstartuj....")
 
-        # frame = self.driver.find_element_by_xpath('//*[@id="gsft_main"]')
-        # self.driver.switch_to.frame(frame)
-
-
         b_startuj = self.driver.find_element(*HomePageLocators.STARTUJ_PROF_MARCIN)
         print("PO szukam bstartuj....")
         sleep(5)
@@ -83,23 +79,35 @@ class HomePage(BasePage):
 
     def go_to_liczykropka_js(self):
         self._hover_over_online_versions()
-        sleep(4)
-        link = self._get_liczykropka_js_link()
-        link.click()
-        sleep(5)
-
-        # self.driver.quit()
         sleep(2)
-        # self.driver = webdriver.Chrome()
-        self.driver.get('https://autyzmsoft.pl/js/liczykropka/liczykropka.html')
+        link = self._get_liczykropka_js_link()
+
+        url_liczykropka = link.get_attribute('href')
+        self.driver.quit()
+        self.driver = webdriver.Chrome()
+        self.driver.get(url_liczykropka)
         self.driver.maximize_window()
-        sleep(3)
-
-
+        # sleep(2)
         bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
         bStartuj.click()
-        sleep(4)
+        sleep(5)
 
+        #
+        # link.click()
+        # sleep(5)
+        #
+        # # self.driver.quit()
+        # sleep(2)
+        # # self.driver = webdriver.Chrome()
+        # self.driver.get('https://autyzmsoft.pl/js/liczykropka/liczykropka.html')
+        # self.driver.maximize_window()
+        # sleep(3)
+        #
+        #
+        # bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
+        # bStartuj.click()
+        # sleep(4)
+        #
 
 
 

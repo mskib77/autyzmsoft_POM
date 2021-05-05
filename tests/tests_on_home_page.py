@@ -48,6 +48,7 @@ class HomePageTest(BaseTest):
                 inactive_links.append(url_str)
         self.assertTrue(test_ok, f"Inactive links on Home Page detected: {inactive_links}")
 
+    @unittest.skip
     def test_prof_marcin_js_opens(self):
         """Test whether javascript application profMarcin opens"""
         hp = self.hp
