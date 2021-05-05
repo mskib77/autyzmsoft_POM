@@ -10,8 +10,8 @@ class BaseTest(unittest.TestCase):
     def setUp(self):
         print("setUp z BaseTest")
         self.driver = webdriver.Chrome()
-        self.driver.implicitly_wait(TestUtils.WAIT_TIME)
         # self.driver = webdriver.Firefox()
+        self.driver.implicitly_wait(TestUtils.WAIT_TIME)
         self.driver.get('https://autyzmsoft.pl')
         self.driver.maximize_window()
         self._dismiss_cookies()

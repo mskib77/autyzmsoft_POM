@@ -54,6 +54,11 @@ class HomePageTest(BaseTest):
         hp.go_to_prof_marcin_js()
         sleep(5)
 
+    def test_liczykropka_js_opens(self):
+        """Test whether javascript application LiczyKropka opens"""
+        hp = self.hp
+        hp.go_to_liczykropka_js()
+        sleep(2)
 
 
 

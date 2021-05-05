@@ -1,5 +1,5 @@
 from time import sleep
-
+from selenium import webdriver
 from selenium.webdriver import ActionChains
 
 from locators import HomePageLocators
@@ -59,6 +59,10 @@ class HomePage(BasePage):
         link = self.driver.find_element(*HomePageLocators.PROF_MARCIN_JS)
         return link
 
+    def _get_liczykropka_js_link(self):
+        link = self.driver.find_element(*HomePageLocators.LICZYKROPKA_JS)
+        return link
+
     def go_to_prof_marcin_js(self):
         self._hover_over_online_versions()
         sleep(2)
@@ -66,11 +70,36 @@ class HomePage(BasePage):
         link.click()
         sleep(5)
         print("szukam bstartuj....")
-        b_startuj = self.driver.find_element(*HomePageLocators.STARTUJ)
+
+        # frame = self.driver.find_element_by_xpath('//*[@id="gsft_main"]')
+        # self.driver.switch_to.frame(frame)
+
+
+        b_startuj = self.driver.find_element(*HomePageLocators.STARTUJ_PROF_MARCIN)
         print("PO szukam bstartuj....")
         sleep(5)
         b_startuj.click()
         sleep(5)
+
+    def go_to_liczykropka_js(self):
+        self._hover_over_online_versions()
+        sleep(4)
+        link = self._get_liczykropka_js_link()
+        link.click()
+        sleep(5)
+
+        # self.driver.quit()
+        sleep(2)
+        # self.driver = webdriver.Chrome()
+        self.driver.get('https://autyzmsoft.pl/js/liczykropka/liczykropka.html')
+        self.driver.maximize_window()
+        sleep(3)
+
+
+        bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
+        bStartuj.click()
+        sleep(4)
+
 
 
 

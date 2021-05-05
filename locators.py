@@ -11,11 +11,16 @@ class HomePageLocators:
 
     # Elements to start and navigate in prof.Marcin Java Script application:
     WERSJE_ONLINE = (By.LINK_TEXT, "wersje online")
-    PROF_MARCIN_JS = (By.PARTIAL_LINK_TEXT, "prof.Marcin")
+    PROF_MARCIN_JS = (By.LINK_TEXT, "prof.Marcin")
+    LICZYKROPKA_JS = (By.LINK_TEXT, "LiczyKropka")
+
+
     # STARTUJ = (By.XPATH, '//a[@href="plansza.html"]')
     # STARTUJ = (By.XPATH, '//section[@class="start"]')
     # STARTUJ = (By.XPATH, '//*[@id="container"]/section[2]/a')
-    STARTUJ = (By.LINK_TEXT, "Startuj")
+    # STARTUJ = (By.LINK_TEXT, "Startuj")
+    STARTUJ_PROF_MARCIN = (By.ID, "b_start_id")
+    STARTUJ_LICZYKROPKA = (By.ID, "bStartuj")
 
 
 class DownloadPageLocators:
