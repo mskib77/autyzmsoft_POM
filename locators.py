@@ -41,6 +41,11 @@ class DownloadPageLocators:
 
 class FullVersionsPageLocators:
 
-    BUY_BUTTON_1 = (By.XPATH, '//input[@class="cssbutton pw-button-01"]')
-    BUY_BUTTON_2 = (By.XPATH, '//input[@class="cssbutton pw-button-02"]')
+    ORDER_BUTTON_1 = (By.XPATH, '//input[@class="cssbutton pw-button-01"]')
+    ORDER_BUTTON_2 = (By.XPATH, '//input[@class="cssbutton pw-button-02"]')
+    ALL_CHECKBOXES = (By.XPATH, '//input[@type="checkbox"]')
+
+    # to dziala:    //text()[contains(., 'zł')]
+
+
 

@@ -16,7 +16,7 @@ class HomePageTest(BaseTest):
         super().setUp()
         self.hp = HomePage(self.driver)
 
-    @unittest.skip
+    #@unittest.skip
     def test_download_page_appears(self):
         """ Fails if _verify_page() in DownloadPage class reports an error in its assert"""
         hp = self.hp
@@ -25,7 +25,7 @@ class HomePageTest(BaseTest):
         # this will instantiate DownloadPage object and will call its _verify_page() method:
         DownloadPage(self.driver)
 
-    @unittest.skip
+    #@unittest.skip
     def test_full_versions_page_appears(self):
         """ Fails if _verify_page() in FullVersions class reports an error in its assert"""
         hp = self.hp
@@ -34,7 +34,7 @@ class HomePageTest(BaseTest):
         # this will instantiate FullVersionPage object and will call its _verify_page() method:
         FullVersionsPage(self.driver)
 
-    @unittest.skip
+    #@unittest.skip
     def test_all_links_are_active(self):
         """Checking whether all links on the Home Page are active."""
         hp = self.hp
@@ -48,7 +48,7 @@ class HomePageTest(BaseTest):
                 inactive_links.append(url_str)
         self.assertTrue(test_ok, f"Inactive links on Home Page detected: {inactive_links}")
 
-    @unittest.skip
+    #@unittest.skip
     def test_liczykropka_js_opens(self):
         """Test whether javascript application LiczyKropka opens"""
         """Passed if:
@@ -93,7 +93,7 @@ class HomePageTest(BaseTest):
 
         self.assertTrue(test_ok, f"Error in liczykropka.js {reasons} See screenshot.")
 
-    @unittest.skip
+    #@unittest.skip
     def test_profmarcin_js_opens(self):
         """Test whether javascript application profMarcin opens"""
         """Passed if:

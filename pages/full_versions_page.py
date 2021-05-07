@@ -10,12 +10,17 @@ class FullVersionsPage(BasePage):
         print("Weryfikacja z FullVersionPage - nadpisująca _verify_page() z BasePage")
         # title_txt = self._get_page_title_txt()
         title_txt = TestUtils.get_page_title_txt(self.driver)
-        assert (title_txt.upper() == TestUtils.fw_title)
+        assert (title_txt.upper() == TestUtils.fv_title)
 
-    def get_buy_button1(self):
-        btn = self.driver.find_element(*FullVersionsPageLocators.BUY_BUTTON_1)
+    def get_order_button1(self):
+        btn = self.driver.find_element(*FullVersionsPageLocators.ORDER_BUTTON_1)
         return btn
 
-    def get_buy_button2(self):
-        btn = self.driver.find_element(*FullVersionsPageLocators.BUY_BUTTON_2)
+    def get_order_button2(self):
+        btn = self.driver.find_element(*FullVersionsPageLocators.ORDER_BUTTON_2)
         return btn
+
+    def get_all_checkboxes_list(self):
+        cb_list = self.driver.find_elements(*FullVersionsPageLocators.ALL_CHECKBOXES)
+        return cb_list
+

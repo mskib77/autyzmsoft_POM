@@ -10,7 +10,8 @@ class TestUtils:
     PAGE_TITLE = (By.XPATH, '//*[@id = "content"]/div[1]/h1')
     hp_title = "STRONA GŁÓWNA"
     dp_title = "DO POBRANIA"
-    fw_title = "PEŁNE WERSJE"
+    fv_title = "PEŁNE WERSJE"
+    od_title = "SZCZEGÓŁY ZAMÓWIENIA"
 
     good_email = "mskib77@gmail.com"
     bad_email = "mskib77*gmail.com"
