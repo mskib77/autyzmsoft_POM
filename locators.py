@@ -40,4 +40,7 @@ class DownloadPageLocators:
 
 
 class FullVersionsPageLocators:
-    pass
+
+    BUY_BUTTON_1 = (By.XPATH, '//input[@class="cssbutton pw-button-01"]')
+    BUY_BUTTON_2 = (By.XPATH, '//input[@class="cssbutton pw-button-02"]')
+
