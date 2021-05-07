@@ -22,8 +22,13 @@ class FullVersionsPageTest(BaseTest):
         self.fw = FullVersionsPage(self.driver)
 
     # dtt as there are 2 buttons that should have same effect
-    @data(1, 2)
+    @data(1, 3)
     def test_click_buy_buttons_without_choosing_items(self, button_number):
+
+        # parameter sanitization:
+        if button_number not in range(1, 3):
+            raise ValueError(f"Improper method parameter. Must be 1 or 2 but {button_number} was given!")
+
         fw = self.fw
         if button_number == 1: btn = fw.get_buy_button1()
         if button_number == 2: btn = fw.get_buy_button2()
