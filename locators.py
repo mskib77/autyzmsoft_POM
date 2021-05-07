@@ -2,6 +2,7 @@ from selenium.webdriver.common.by import By
 
 
 class HomePageLocators:
+
     DOWNLOAD_LINK = (By.PARTIAL_LINK_TEXT, "Pobieranie")
     PELNE_WERSJE_LINK = (By.PARTIAL_LINK_TEXT, "PEŁNE WERSJE")
     COOKIE_BTN = (By.ID, "catapultCookie")
@@ -18,12 +19,19 @@ class HomePageLocators:
     STARTUJ_PROF_MARCIN = (By.ID, "b_start_id")
     STARTUJ_LICZYKROPKA = (By.ID, "bStartuj")
 
-    # elements on Liczykropka js application:
-    LICZBA = (By.XPATH, '//div[@class="div-liczba-klasa div-liczba-klasa-growing"]')
-    KLAWISZE = (By.CLASS_NAME, "klawisz-klasa")
+    # elements on Liczykropka (LK) js application:
+    LICZBA_LK = (By.XPATH, '//div[@class="div-liczba-klasa div-liczba-klasa-growing"]')
+    KLAWISZE_LK = (By.CLASS_NAME, "klawisz-klasa")
+
+    # elements on prof.Marcin (PM) js application:
+    KLAWISZE_PM = (By.CLASS_NAME, "klawisz")
+    PICTURE_PM = (By.ID, "pctArea")
+    TXT_UNDER_PICTURE_PM = (By.ID, "hintArea")
+    GREEN_BUTTON_PM = (By.ID, "bDalej")
 
 
 class DownloadPageLocators:
+
     EMAIL_FIELD = (By.ID, "id_Email")
     SEND_BTN = (By.ID, "bWyslij")
     ERROR_INFO = (By.ID, "email_err_1")

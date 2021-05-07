@@ -64,7 +64,7 @@ class HomePage(BasePage):
 
     def _start_js_app_settings_screen(self, link_to_app):
         """Opens the first screen of Java Script app given in the link_to_app parameter"""
-        """Used to start the js applications from there by finding and clicking links"""
+        """Used to start the js applications from this screen by finding and clicking links"""
         self._hover_over(HomePageLocators.WERSJE_ONLINE)  # uncovering menu items
         self._hover_over(link_to_app)  # unnecessary, but better visual effect ;)
         link = WebDriverWait(self.driver, TestUtils.WAIT_TIME).until(EC.presence_of_element_located(link_to_app))
@@ -72,24 +72,40 @@ class HomePage(BasePage):
         url = link.get_attribute('href')
         self.driver.get(url)
 
-    def go_to_prof_marcin_js(self):
+    def go_to_profmarcin_js(self):
+        """Starting prof.Marcin js application"""
         self._start_js_app_settings_screen(HomePageLocators.PROF_MARCIN_JS)
         bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_PROF_MARCIN)
         bStartuj.click()
 
     def get_buttons_list_from_liczykropka(self):
-        blist = self.driver.find_elements(*HomePageLocators.KLAWISZE)
+        blist = self.driver.find_elements(*HomePageLocators.KLAWISZE_LK)
         return blist
 
     def get_number_from_liczykropka(self):
-        number = self.driver.find_element(*HomePageLocators.LICZBA)
+        number = self.driver.find_element(*HomePageLocators.LICZBA_LK)
         return number
 
     def go_to_liczykropka_js(self):
+        """Starting Liczykropka js application"""
         self._start_js_app_settings_screen(HomePageLocators.LICZYKROPKA_JS)
         bStartuj = self.driver.find_element(*HomePageLocators.STARTUJ_LICZYKROPKA)
         bStartuj.click()
 
+    def get_buttons_list_from_profmarcin(self):
+        blist = self.driver.find_elements(*HomePageLocators.KLAWISZE_PM)
+        return blist
 
+    def get_picture_from_profmarcin(self):
+        pict = self.driver.find_element(*HomePageLocators.PICTURE_PM)
+        return pict
+
+    def get_text_under_picture_profmarcin(self):
+        elem = self.driver.find_element(*HomePageLocators.TXT_UNDER_PICTURE_PM)
+        return elem.text
+
+    def get_green_button_from_profmarcin(self):
+        elem = self.driver.find_element(*HomePageLocators.GREEN_BUTTON_PM)
+        return elem
 
 
