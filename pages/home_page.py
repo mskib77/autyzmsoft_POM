@@ -1,4 +1,7 @@
+from typing import Any, Union
+
 from selenium.webdriver import ActionChains
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import HomePageLocators
@@ -85,6 +88,15 @@ class HomePage(BasePage):
     def get_number_from_liczykropka(self):
         number = self.driver.find_element(*HomePageLocators.LICZBA_LK)
         return number
+
+    def get_button_with_number_from_liczykropka(self, number_as_str):
+        xpath = "//button[@wartosc=\"" + number_as_str + "\"" + "]"
+        btn = self.driver.find_element(By.XPATH, xpath)
+        return btn
+
+    def get_green_button_from_liczykropka(self):
+        elem = self.driver.find_element(*HomePageLocators.GREEN_BUTTON_LK)
+        return elem
 
     def go_to_liczykropka_js(self):
         """Starting Liczykropka js application"""

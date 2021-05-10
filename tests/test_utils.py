@@ -5,7 +5,7 @@ from urllib.request import urlopen
 
 
 class TestUtils:
-    WAIT_TIME = 25  # system-wide implicit wait
+    WAIT_TIME = 5  # system-wide implicit wait
     # Pages' titles (same location on each page):
     PAGE_TITLE = (By.XPATH, '//*[@id = "content"]/div[1]/h1')
     hp_title = "STRONA GŁÓWNA"

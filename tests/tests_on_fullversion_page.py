@@ -34,11 +34,11 @@ class FullVersionsPageTest(BaseTest):
         if number == 2: btn = fv.get_order_button2()
         return btn
 
-    # @unittest.skip
+    @unittest.skip
     @data(1, 2)
     def test_click_order_buttons_without_choosing_items(self, button_number):
         """Passed if Alert window appears"""
-        """ddt is used as there are 2 buttons that clicking on them should have same effect"""
+        """ddt is used as there are 2 buttons clicking on them should have same effect"""
 
         btn = self._determine_button(button_number)
         btn.click()
@@ -49,20 +49,23 @@ class FullVersionsPageTest(BaseTest):
             test_ok = True
             # dismissing the alert (unnecessary) :
             # alert = self.driver.switch_to.alert
+            # txt = alert.text
+            # print(txt)
             # alert.accept()
         except TimeoutException:
             test_ok = False
 
         self.assertTrue(test_ok, "Alert does not exist in page!")
 
-    # @unittest.skip
+    @unittest.skip
     @data(1, 2)
     def test_click_order_buttons_after_choosing_items(self, button_number):
         """Passed if Order Details page appears"""
-        """ddt is used as there are 2 buttons that clicking on them should have same effect"""
+        """ddt is used as there are 2 buttons clicking on them should have same effect"""
 
         fv = self.fv
         cb_list = fv.get_all_checkboxes_list()
+        print("dlugosc listy: ", len(cb_list))
         maxv = len(cb_list) - 1
         rnd = randint(0, maxv)
         cb_list[rnd].click()

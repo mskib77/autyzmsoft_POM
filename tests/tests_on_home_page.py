@@ -1,5 +1,10 @@
 import unittest
 
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.wait import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+from locators import HomePageLocators
 from pages.download_page import DownloadPage
 from pages.home_page import HomePage
 from pages.full_versions_page import FullVersionsPage
@@ -52,8 +57,8 @@ class HomePageTest(BaseTest):
     def test_liczykropka_js_opens(self):
         """Test whether javascript application LiczyKropka opens"""
         """Passed if:
-        1. a big number appears AND
-        2. 5 buttons appear
+        1. 5 buttons appear
+        2. a big number appears AND
         """
         NUM_BUTTONS = 5  # how many buttons should appear
         hp = self.hp
@@ -93,7 +98,7 @@ class HomePageTest(BaseTest):
 
         self.assertTrue(test_ok, f"Error in liczykropka.js {reasons} See screenshot.")
 
-    #@unittest.skip
+    # @unittest.skip
     def test_profmarcin_js_opens(self):
         """Test whether javascript application profMarcin opens"""
         """Passed if:
@@ -140,7 +145,7 @@ class HomePageTest(BaseTest):
         """Passed if:
         1. All buttons with words except the proper one(s) are blocked AND
         2. There appear a text element under the picture. The element contains proper word AND
-        3. Big green button with right arrow appear
+        3. Big green button with right arrow appears
         """
         hp = self.hp
         hp.go_to_profmarcin_js()
@@ -180,12 +185,9 @@ class HomePageTest(BaseTest):
             test_2_ok = False
 
         # Testing condition No 3:
-        test_3_ok = False
-        try:
-            hp.get_green_button_from_profmarcin()
-            test_3_ok = True
-        except NoSuchElementException:
-            test_3_ok = False
+        green_btn = hp.get_green_button_from_profmarcin()
+        style = green_btn.get_attribute("style")
+        test_3_ok = 'transparent' not in style
 
         # Determining the reason(s) of negative test (if any):
         reasons = []
@@ -200,8 +202,51 @@ class HomePageTest(BaseTest):
 
         self.assertTrue(test_ok, f"Test: test_clicking_correct_button_in_profmarcin_js(): Errors detected: {reasons} See screenshot.")
 
+    def test_clicking_correct_button_in_liczykropka_js(self):
+        """Passed if:
+        1. All buttons with numbers except the proper one(s) are blocked AND
+        2. Big green button with @ sign appears
+        """
+        hp = self.hp
+        hp.go_to_liczykropka_js()
+        sleep(3)
+        WebDriverWait(self.driver, TestUtils.WAIT_TIME).until(EC.presence_of_element_located(HomePageLocators.KLAWISZE_LK))
+        # Clicking proper button:
+        number = hp.get_number_from_liczykropka().text
+        proper_btn = hp.get_button_with_number_from_liczykropka(number)
+        proper_btn.click()
+        sleep(3)
 
+        # Testing condition No 1:
+        test_1_ok = True
+        buttons_list = hp.get_buttons_list_from_liczykropka()
+        for b in buttons_list:
+            b_value = b.get_attribute("wartosc")
+            if b_value != number:
+                if b.get_attribute('enabled') == 'true':
+                    test_1_ok = False
+                    break
+            if b_value == number:
+                if b.get_attribute('enabled') == 'false':
+                    test_1_ok = False
+                    break
 
+        # Testing condition No 2:
+        green_btn = hp.get_green_button_from_liczykropka()
+        style = green_btn.get_attribute("style")
+        test_2_ok = 'visible' in style
+
+        # Determining the reason(s) of negative test (if any):
+        reasons = []
+        if not test_1_ok: reasons.append("Buttons improperly blocked.")
+        if not test_2_ok: reasons.append("Green button did not appear.")
+
+        test_ok = test_1_ok and test_2_ok
+
+        if not test_ok:
+            TestUtils.screen_shot(self.driver, "test_clicking_correct_button_in_liczykropka_js()")
+
+        self.assertTrue(test_ok, f"Test: test_clicking_correct_button_in_liczykropka_js(): Errors detected: {reasons} See screenshot.")
 
 
 

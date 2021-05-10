@@ -22,6 +22,8 @@ class HomePageLocators:
     # elements on Liczykropka (LK) js application:
     LICZBA_LK = (By.XPATH, '//div[@class="div-liczba-klasa div-liczba-klasa-growing"]')
     KLAWISZE_LK = (By.CLASS_NAME, "klawisz-klasa")
+    GREEN_BUTTON_LK = (By.ID, "bDalej")
+
 
     # elements on prof.Marcin (PM) js application:
     KLAWISZE_PM = (By.CLASS_NAME, "klawisz")
