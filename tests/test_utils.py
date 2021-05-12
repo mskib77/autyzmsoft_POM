@@ -5,7 +5,12 @@ from urllib.request import urlopen
 
 
 class TestUtils:
-    WAIT_TIME = 5  # system-wide implicit wait
+    # system-wide implicit wait:
+    WAIT_TIME = 5
+
+    # website header:
+    WEBSITE_HEADER = "Programy komputerowe dla dziecka autystycznego"
+
     # Pages' titles (same location on each page):
     PAGE_TITLE = (By.XPATH, '//*[@id = "content"]/div[1]/h1')
     hp_title = "STRONA GŁÓWNA"
@@ -13,13 +18,17 @@ class TestUtils:
     fv_title = "PEŁNE WERSJE"
     od_title = "SZCZEGÓŁY ZAMÓWIENIA"
 
+    # email testing:
     good_email = "mskib77@gmail.com"
     bad_email = "mskib77*gmail.com"
 
-    # error info on download page:
+    # info error on download page:
     dp_error_info = "We wprowadzonych danych wystąpiły błędy"
-    # info text about email sent correctly:
+    # info text about email that has been sent correctly:
     dp_info_text = "WYSLANO LINKI NA ADRES"
+
+    # alert text on Full Versions page:
+    ALERT_TEXT = "Nie zaznaczyłeś niczego"
 
     @classmethod
     def get_page_title_txt(cls, driver):

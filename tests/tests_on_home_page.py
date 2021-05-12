@@ -233,6 +233,8 @@ class HomePageTest(BaseTest):
         self.assertTrue(test_ok,
                         f"Test: test_clicking_correct_button_in_profmarcin_js(): Errors detected: {reasons} See screenshot.")
 
+    # Test case id HP_07
+    # @unittest.skip
     def test_clicking_correct_button_in_liczykropka_js(self):
         """Passed if:
         1. All buttons with numbers except the proper one(s) are disabled AND
@@ -247,7 +249,7 @@ class HomePageTest(BaseTest):
         number = hp.get_number_from_liczykropka().text
         proper_btn = hp.get_button_with_number_from_liczykropka(number)
         proper_btn.click()
-        sleep(2)    # unnecessary, but better visual effect ;)
+        sleep(3)    # unnecessary, but better visual effect ;)
 
         # Testing condition No 1:
         test_1_ok = True
