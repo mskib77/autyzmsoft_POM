@@ -1,3 +1,4 @@
+from time import sleep
 from typing import Any, Union
 
 from selenium.webdriver import ActionChains
@@ -111,6 +112,12 @@ class HomePage(BasePage):
     def get_picture_from_profmarcin(self):
         pict = self.driver.find_element(*HomePageLocators.PICTURE_PM)
         return pict
+
+    def is_picture_visible_from_profmarcin(self):
+        pict = self.get_picture_from_profmarcin()
+        style = pict.get_attribute("style")
+        is_visible = 'tlo.webp' not in style
+        return is_visible
 
     def get_text_under_picture_profmarcin(self):
         elem = self.driver.find_element(*HomePageLocators.TXT_UNDER_PICTURE_PM)

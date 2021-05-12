@@ -24,7 +24,7 @@ class FullVersionsPageTest(BaseTest):
         # Creating FullVersionsPage object for each test:
         self.fv = FullVersionsPage(self.driver)
 
-    def _determine_button(self, number):
+    def _determine_button_to_click(self, number):
         """Auxiliary; returns order button 1 or 2 as specified by the 'number' parameter"""
         # parameters sanitization:
         if number not in range(1, 3):
@@ -38,9 +38,9 @@ class FullVersionsPageTest(BaseTest):
     @data(1, 2)
     def test_click_order_buttons_without_choosing_items(self, button_number):
         """Passed if Alert window appears"""
-        """ddt is used as there are 2 buttons clicking on them should have same effect"""
+        """ddt is used as there are 2 buttons that clicking on them should have same effect"""
 
-        btn = self._determine_button(button_number)
+        btn = self._determine_button_to_click(button_number)
         btn.click()
         sleep(2)  # unnecessary, for better visual effect ;)
 
@@ -57,21 +57,27 @@ class FullVersionsPageTest(BaseTest):
 
         self.assertTrue(test_ok, "Alert does not exist in page!")
 
-    @unittest.skip
-    @data(1, 2)
+    # @unittest.skip
+    @data(1, 2, 2, 2, 2, 2)
     def test_click_order_buttons_after_choosing_items(self, button_number):
         """Passed if Order Details page appears"""
-        """ddt is used as there are 2 buttons clicking on them should have same effect"""
+        """ddt is used as there are 2 buttons that clicking on them should have same effect"""
 
         fv = self.fv
         cb_list = fv.get_all_checkboxes_list()
         print("dlugosc listy: ", len(cb_list))
-        maxv = len(cb_list) - 1
-        rnd = randint(0, maxv)
+        max_val = len(cb_list) - 1
+        rnd = randint(0, max_val)
+
+        rnd = randint(5,5) #uwaga - blad jest w javascript na stronie - ptaszek6
+        print("losowa liczba: ", rnd)
+
+        sleep(1)
         cb_list[rnd].click()
-        self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+        sleep(1)
+        # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
         sleep(2)
-        btn = self._determine_button(button_number)
+        btn = self._determine_button_to_click(button_number)
         btn.click()
         sleep(2)
         # this will instantiate OrderDetailsPage object and will call its _verify_page() method:
