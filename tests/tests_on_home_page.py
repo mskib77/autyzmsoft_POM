@@ -1,4 +1,5 @@
 import unittest
+from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from locators import HomePageLocators
@@ -151,6 +152,23 @@ class HomePageTest(BaseTest):
         str_tmp = str_tmp.partition('%')[0]
         return int(str_tmp) > number
 
+    def _wait_for_real_picture(self):
+        """Probing picture until it becomes visible (==no longer background color)"""
+        """Then returns the name of the picture (which is the word to be guessed)"""
+        found = False
+        while not found:
+            pict = self.hp.get_picture_from_profmarcin()
+            style = pict.get_attribute('style')
+            # getting picture name (== the correct word on the buttons):
+            word = style.partition("zasoby/")[2].partition(".")[0]
+            if word != "tlo":  # "invisible" picture is 'tlo.webp'
+                found = True
+            else:
+                sleep(0.5)
+        return word
+
+    # Test case id HP_06
+    # @unittest.skip
     def test_clicking_correct_button_in_profmarcin_js(self):
         """Passed if:
         1. All texts on buttons with improper words are printed in 'font-weigh: normal'; text on button(s) with proper
@@ -160,12 +178,11 @@ class HomePageTest(BaseTest):
         """
         hp = self.hp
         hp.go_to_profmarcin_js()
-        sleep(3)
-        buttons_list = hp.get_buttons_list_from_profmarcin()
-        pict = hp.get_picture_from_profmarcin()
+
         # getting picture name (== the correct word on the buttons):
-        style = pict.get_attribute('style')
-        word = style.partition("zasoby/")[2].partition(".")[0]
+        word = self._wait_for_real_picture()
+
+        buttons_list = hp.get_buttons_list_from_profmarcin()
 
         # clicking on the button containing 'word':
         for b in buttons_list:
@@ -230,7 +247,7 @@ class HomePageTest(BaseTest):
         number = hp.get_number_from_liczykropka().text
         proper_btn = hp.get_button_with_number_from_liczykropka(number)
         proper_btn.click()
-        sleep(3)
+        sleep(2)    # unnecessary, but better visual effect ;)
 
         # Testing condition No 1:
         test_1_ok = True
