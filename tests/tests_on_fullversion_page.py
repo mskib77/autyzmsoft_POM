@@ -1,6 +1,7 @@
 import unittest
 from time import sleep
 from selenium.common.exceptions import TimeoutException
+from selenium.webdriver import ActionChains
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from pages.full_versions_page import FullVersionsPage
@@ -58,57 +59,30 @@ class FullVersionsPageTest(BaseTest):
         self.assertTrue(test_ok, "Alert does not exist in page!")
 
     # @unittest.skip
-    @data(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
+    @data(1, 2)
     def test_click_order_buttons_after_choosing_items(self, button_number):
         """Passed if Order Details page appears"""
         """ddt is used as there are 2 buttons that clicking on them should have same effect"""
 
         fv = self.fv
         cb_list = fv.get_all_checkboxes_list()
-        print("dlugosc listy: ", len(cb_list))
+        # clicking on randomly chosen checkbox:
         max_val = len(cb_list) - 1
         rnd = randint(0, max_val)
-        # rnd = randint(21,22)
-        print("losowa liczba: ", rnd)
-
-        cb = fv.get_checkbox_of_number(rnd)
-        # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-        sleep(1)
+        cb = cb_list[rnd]
+        ActionChains(self.driver).move_to_element(cb).perform()
+        self.driver.execute_script("window.scrollBy(0, 150)")  # sometimes move_to_element is not enough to fully show the element
         cb.click()
-        # cb_list[rnd].click()
-        sleep(1)
-
-        print(f"element {rnd} isDisplayed: {cb.is_displayed()}")
-        print(f"element {rnd} isSelected: {cb.is_selected()}")
-
-        # Actions action = new Actions(driver).
-        # action.moveToElement(elem).click().build().perform();
-        action = Actions(self.driver)
-        action.m
-
-        # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-        sleep(2)
+        # print(f"element {rnd} isDisplayed: {cb.is_displayed()}")
+        # print(f"element {rnd} isSelected: {cb.is_selected()}")
+        # Trying to bring up the Order Details page:
         btn = self._determine_button_to_click(button_number)
+        sleep(1)    # unnecessary, for better visual effect
         btn.click()
-        sleep(2)
-        # this will instantiate OrderDetailsPage object and will call its _verify_page() method:
+        sleep(1)    # this is necessary for the html page to open
+        # This will instantiate OrderDetailsPage object and will call its _verify_page() method (error, if any,
+        # will be reported by it):
         OrderDetailsPage(self.driver)
 
-    # @unittest.skip
-    # def test_dojedz_do(self):
-    #     fv = self.fv
-    #     # cb_list = fv.get_all_checkboxes_list()
-    #     # print("dligosc listy: ",len(cb_list))
-    #     nn = 21
-    #     elnn = fv.get_checkbox_of_number(nn)
-    #     print(f"element {nn}: {elnn}")
-    #     print(f"element {nn} isDisplayed: {elnn.is_displayed()}")
-    #     print(f"element {nn} isSelected1: {elnn.is_selected()}")
-    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
-    #     sleep(4)
+
 

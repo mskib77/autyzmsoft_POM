@@ -24,9 +24,3 @@ class FullVersionsPage(BasePage):
         cb_list = self.driver.find_elements(*FullVersionsPageLocators.ALL_CHECKBOXES)
         return cb_list
 
-    def get_checkbox_of_number(self, no):
-        cbl = self.get_all_checkboxes_list()
-        return cbl[no]
-
-
-
