@@ -3,6 +3,8 @@ from datetime import datetime
 from selenium.webdriver.common.by import By
 from urllib.request import urlopen
 
+from locators import PageTitlesLocators
+
 
 class TestUtils:
     # system-wide implicit wait:
@@ -10,9 +12,7 @@ class TestUtils:
 
     # website header:
     WEBSITE_HEADER = "Programy komputerowe dla dziecka autystycznego"
-
-    # Pages' titles (same location on each page):
-    PAGE_TITLE = (By.XPATH, '//*[@id = "content"]/div[1]/h1')
+    # Page titles:
     hp_title = "STRONA GŁÓWNA"
     dp_title = "DO POBRANIA"
     fv_title = "PEŁNE WERSJE"
@@ -32,7 +32,8 @@ class TestUtils:
 
     @classmethod
     def get_page_title_txt(cls, driver):
-        page_title = driver.find_element(*cls.PAGE_TITLE)
+        # page_title = driver.find_element(*cls.PAGE_TITLE)
+        page_title = driver.find_element(*PageTitlesLocators.PAGE_TITLE)
         return page_title.text
 
     @classmethod
