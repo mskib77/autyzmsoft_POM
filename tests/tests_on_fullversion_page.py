@@ -35,7 +35,7 @@ class FullVersionsPageTest(BaseTest):
         return btn
 
     # Test case id DP_01
-    # @unittest.skip
+    @unittest.skip
     @data(1, 2)
     def test_click_order_buttons_without_choosing_items(self, button_number):
         """Passed if Alert window appears"""
@@ -57,8 +57,8 @@ class FullVersionsPageTest(BaseTest):
 
         self.assertTrue(test_ok, "Alert does not exist in page!")
 
-    @unittest.skip
-    # @data(1, 2, 2, 2, 2, 2)
+    # @unittest.skip
+    @data(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1)
     def test_click_order_buttons_after_choosing_items(self, button_number):
         """Passed if Order Details page appears"""
         """ddt is used as there are 2 buttons that clicking on them should have same effect"""
@@ -68,13 +68,24 @@ class FullVersionsPageTest(BaseTest):
         print("dlugosc listy: ", len(cb_list))
         max_val = len(cb_list) - 1
         rnd = randint(0, max_val)
-
-        rnd = randint(21,21)
+        # rnd = randint(21,22)
         print("losowa liczba: ", rnd)
 
+        cb = fv.get_checkbox_of_number(rnd)
+        # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
         sleep(1)
-        cb_list[rnd].click()
+        cb.click()
+        # cb_list[rnd].click()
         sleep(1)
+
+        print(f"element {rnd} isDisplayed: {cb.is_displayed()}")
+        print(f"element {rnd} isSelected: {cb.is_selected()}")
+
+        # Actions action = new Actions(driver).
+        # action.moveToElement(elem).click().build().perform();
+        action = Actions(self.driver)
+        action.m
+
         # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
         sleep(2)
         btn = self._determine_button_to_click(button_number)
@@ -82,3 +93,22 @@ class FullVersionsPageTest(BaseTest):
         sleep(2)
         # this will instantiate OrderDetailsPage object and will call its _verify_page() method:
         OrderDetailsPage(self.driver)
+
+    # @unittest.skip
+    # def test_dojedz_do(self):
+    #     fv = self.fv
+    #     # cb_list = fv.get_all_checkboxes_list()
+    #     # print("dligosc listy: ",len(cb_list))
+    #     nn = 21
+    #     elnn = fv.get_checkbox_of_number(nn)
+    #     print(f"element {nn}: {elnn}")
+    #     print(f"element {nn} isDisplayed: {elnn.is_displayed()}")
+    #     print(f"element {nn} isSelected1: {elnn.is_selected()}")
+    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+    #     # self.driver.execute_script("window.scrollBy(0, 250)")  # unnecessary, but better visual effect
+    #     sleep(4)
+
