@@ -45,12 +45,7 @@ class FullVersionsPageLocators:
     ORDER_BUTTON_1 = (By.XPATH, '//input[@class="cssbutton pw-button-01"]')
     ORDER_BUTTON_2 = (By.XPATH, '//input[@class="cssbutton pw-button-02"]')
     ALL_CHECKBOXES = (By.XPATH, '//input[@type="checkbox"]')
-<<<<<<< HEAD
-=======
-
 
 class PageTitlesLocators:
     # Pages' titles (same location on each page):
     PAGE_TITLE = (By.XPATH, '//*[@id = "content"]/div[1]/h1')
-
->>>>>>> 53f9eb1ba396d1a82d624cc369bcd329c6081017

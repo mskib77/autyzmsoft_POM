@@ -45,7 +45,7 @@ class TestUtils:
 
     @classmethod
     def get_link_status(cls, url_param):
-        """Returns True if url (given as string) points to an active address"""
+        """Returns True if url_param (given as string) points to an active address"""
         try:
             urlopen(url_param)
             print(f"{url_param} - ok")
