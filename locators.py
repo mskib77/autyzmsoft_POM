@@ -24,7 +24,6 @@ class HomePageLocators:
     KLAWISZE_LK = (By.CLASS_NAME, "klawisz-klasa")
     GREEN_BUTTON_LK = (By.ID, "bDalej")
 
-
     # elements on prof.Marcin (PM) js application:
     KLAWISZE_PM = (By.CLASS_NAME, "klawisz")
     PICTURE_PM = (By.ID, "pctArea")
@@ -46,8 +45,3 @@ class FullVersionsPageLocators:
     ORDER_BUTTON_1 = (By.XPATH, '//input[@class="cssbutton pw-button-01"]')
     ORDER_BUTTON_2 = (By.XPATH, '//input[@class="cssbutton pw-button-02"]')
     ALL_CHECKBOXES = (By.XPATH, '//input[@type="checkbox"]')
-
-    # to dziala:    //text()[contains(., 'zł')]
-
-
-

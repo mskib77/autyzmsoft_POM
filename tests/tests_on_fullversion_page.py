@@ -35,8 +35,8 @@ class FullVersionsPageTest(BaseTest):
         if number == 2: btn = fv.get_order_button2()
         return btn
 
-    # Test case id DP_01
-    @unittest.skip
+    # Test case id FV_01
+    # @unittest.skip
     @data(1, 2)
     def test_click_order_buttons_without_choosing_items(self, button_number):
         """Passed if Alert window appears"""
@@ -58,6 +58,7 @@ class FullVersionsPageTest(BaseTest):
 
         self.assertTrue(test_ok, "Alert does not exist in page!")
 
+    # Test case id FV_02
     # @unittest.skip
     @data(1, 2)
     def test_click_order_buttons_after_choosing_items(self, button_number):
@@ -75,7 +76,7 @@ class FullVersionsPageTest(BaseTest):
         cb.click()
         # print(f"element {rnd} isDisplayed: {cb.is_displayed()}")
         # print(f"element {rnd} isSelected: {cb.is_selected()}")
-        # Trying to bring up the Order Details page:
+        # Bring up the Order Details page:
         btn = self._determine_button_to_click(button_number)
         sleep(1)    # unnecessary, for better visual effect
         btn.click()

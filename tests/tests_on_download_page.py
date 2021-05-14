@@ -1,3 +1,5 @@
+import unittest
+
 from pages.download_page import DownloadPage
 from pages.home_page import HomePage
 from tests.base_test import BaseTest
