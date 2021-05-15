@@ -18,7 +18,7 @@ class DownloadPageTest(BaseTest):
         # Creating DownloadPage object for each test:
         self.dp = DownloadPage(self.driver)
 
-    # Test case id DP_01
+    # Test case id DP_01 (DP stands for Download Page test)
     # @unittest.skip
     def test_getting_download_links_with_correct_email(self):
         """Passed if:

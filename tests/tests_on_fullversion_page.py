@@ -35,7 +35,7 @@ class FullVersionsPageTest(BaseTest):
         if number == 2: btn = fv.get_order_button2()
         return btn
 
-    # Test case id FV_01
+    # Test case id FV_01 (FV stands for Full Versions Page test)
     # @unittest.skip
     @data(1, 2)
     def test_click_order_buttons_without_choosing_items(self, button_number):
