@@ -7,7 +7,7 @@ Html reports are placed in <em>test_results</em> in the default directory
 
 <h2>List of test cases:</h2>
 Totals: 11 test cases<br>
-<em>DP stands for Download Page test, HP - Home Page Tests, FV - Download Page test</em>
+<em>DP stands for Download Page test, HP - Home Page Tests, FV - Full Versions Page test</em>
 <hr>
 HP_01<br>
 <strong>def test_download_page_appears(self):</strong><br>
